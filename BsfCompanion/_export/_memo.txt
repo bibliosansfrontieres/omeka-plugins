@@ -1,0 +1,26 @@
+	# Création de l'environnement virtuel "omekatopkg"
+	python -m venv omekatopkg
+
+	# Activation de l'environnement virtuel "omekatopkg"
+	omekatopkg\Scripts\activate.bat
+
+	# Installation de l'utilitaire omeka-to-pkg à partir du repository (branche json)
+	pip install git+https://framagit.org/ideascube/omeka-to-pkg.git@json
+
+	# Vérification
+	omeka-to-pkg -h
+
+	# Désctivation de l'environnement virtuel "omekatopkg"
+	deactivate
+
+# Installation globale
+pip install git+https://framagit.org/ideascube/omeka-to-pkg.git@json
+omeka-to-pkg -h
+
+#Désinstallation
+pip uninstall omeka-to-pkg
+
+# Test "in situ" de l'éxécution
+omeka-to-pkg --package-id 19 --name 19_2_fichiers_etonnants.yaml --description "description du package" --language FR --url http://localhost/omeka/admin/package-manager/index/show/id/19 D:\Jamy\Documents\IDPLUS\BSF\omekatopkg\pkg_19.json output/pkg_19.zip > 19_rapport.txt
+
+

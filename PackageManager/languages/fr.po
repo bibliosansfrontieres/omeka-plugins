@@ -1,0 +1,362 @@
+# Translation for the Package Manager plugin for Omeka.
+# Copyright (C) 2017 id[+] Technology for BSF
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PackageManager\n"
+"POT-Creation-Date: 2017-03-30 14:08+0200\n"
+"PO-Revision-Date: 2017-03-30 14:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-KeywordsList: __;plural:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: PackageManagerPlugin.php:195 controllers/IndexController.php:329
+msgid "Select Below"
+msgstr "Choisir ci-dessous"
+
+#: PackageManagerPlugin.php:198
+msgid "Item Type"
+msgstr ""
+
+#: PackageManagerPlugin.php:207
+msgid "Tags"
+msgstr ""
+
+#: PackageManagerPlugin.php:208
+msgid "Files"
+msgstr ""
+
+#: PackageManagerPlugin.php:209
+msgid "Collections"
+msgstr ""
+
+#: PackageManagerPlugin.php:317 views/admin/relationship.php:2
+msgid "Packages"
+msgstr "Paquets"
+
+#: PackageManagerPlugin.php:329
+msgid "Cart"
+msgstr "Panier"
+
+#: PackageManagerPlugin.php:339
+msgid "Package"
+msgstr "Paquet"
+
+#: config_form.php:3
+msgid "Export packages inline ?"
+msgstr "Export des paquets en ligne ?"
+
+#: config_form.php:6
+msgid "If checked, package export will be output inline."
+msgstr "Si coché, l'export du paquet sera affiché en ligne."
+
+#: config_form.php:13
+msgid "Display relationship ?"
+msgstr "Affichage des relations"
+
+#: config_form.php:16
+msgid "If checked, package relationship will be displayed on item page."
+msgstr ""
+"Si coché, les relations avec les paquets seront affichées dans la page de "
+"contenu"
+
+#: config_form.php:23
+msgid "Keep Empty Packages ?"
+msgstr "Conserver les paquets vides ?"
+
+#: config_form.php:26
+msgid "If checked, empty packages (after items deletion) will be keeped."
+msgstr ""
+"Si coché, les paquets vides (après suppression de contenus) seront conservés."
+
+#: config_form.php:33
+msgid "Enable Simple Vocab filter ?"
+msgstr "Activer le filtre Simple Vocab"
+
+#: config_form.php:36
+msgid "If checked, use Simple Vocab filter on matching package metadata."
+msgstr ""
+"Si coché, le filtrage Simple Vocab sera utilisé sur métadonnées de package "
+"compatibles"
+
+#: config_form.php:44
+msgid "Item Type Association ?"
+msgstr "Associer à un type de contenu ?"
+
+#: config_form.php:47
+msgid ""
+"If you choose an item type here, packages could be associated with one or "
+"more items of this type. Be careful, those items couldn't be added to cart "
+"anymore."
+msgstr ""
+"Si vous choisissez un type de contenu, les paquets pourront être associés "
+"avec un ou plusieurs contenus de ce type. Attention, ces contenus ne "
+"pourront plus être ajoutés au panier."
+
+#: config_form.php:58
+msgid "Select exported fields"
+msgstr "Choisir les champs à exporter"
+
+#: config_form.php:63 config_form.php:67 config_form.php:77
+#: views/admin/cart/browse.php:24
+msgid "remove"
+msgstr "enlever"
+
+#: config_form.php:72
+msgid "add field"
+msgstr "ajouter un champ"
+
+#: controllers/CartController.php:63
+msgid "Cart cleared"
+msgstr "Panier vidé"
+
+#: controllers/CartController.php:92
+msgid "No item to batch add"
+msgstr "Aucun élément à ajouter en bloc"
+
+#: controllers/CartController.php:99 controllers/CartController.php:137
+msgid "No item to add"
+msgstr "Aucun contenu à ajouter"
+
+#: controllers/CartController.php:112 controllers/CartController.php:145
+msgid "No item added"
+msgstr "Aucun contenu ajouté"
+
+#: controllers/CartController.php:113 controllers/CartController.php:146
+#, php-format
+msgid "%d Items added"
+msgstr "%d éléments ajoutés"
+
+#: controllers/CartController.php:113 controllers/CartController.php:146
+msgid "Item added"
+msgstr "Élément ajouté"
+
+#: controllers/CartController.php:131 controllers/CartController.php:133
+msgid "Can't retrieve package info"
+msgstr "Impossible d'obtenir les informations relatives au paquet"
+
+#: controllers/IndexController.php:75 views/admin/index/browse.php:13
+msgid "You must add item(s) in your cart before creating a package"
+msgstr ""
+"Vous devez ajouter des éléments dans votre panier avant de créer un paquet"
+
+#: controllers/IndexController.php:106
+#, php-format
+msgid "Package %s deleted."
+msgstr "Paquet %s supprimé"
+
+#: controllers/IndexController.php:138 views/admin/index/browse-list.php:5
+msgid "Name"
+msgstr "Nom"
+
+#: controllers/IndexController.php:139
+msgid "Name of the package (required)"
+msgstr "Nom du paquet (obligatoire)"
+
+#: controllers/IndexController.php:150 views/admin/index/show.php:12
+msgid "Description"
+msgstr "Description"
+
+#: controllers/IndexController.php:151
+msgid "Description of the package (required)"
+msgstr "Description du paquet (obligatoire)"
+
+#: controllers/IndexController.php:161 views/admin/index/show.php:16
+msgid "Goal"
+msgstr "Objectif global"
+
+#: controllers/IndexController.php:169 views/admin/index/browse-list.php:6
+#: views/admin/index/show.php:17
+msgid "Audience"
+msgstr "Audience"
+
+#: controllers/IndexController.php:177 views/admin/index/browse-list.php:7
+#: views/admin/index/show.php:18
+msgid "Language"
+msgstr "Langue"
+
+#: controllers/IndexController.php:185 views/admin/index/show.php:19
+msgid "Language level"
+msgstr "Niveau de langue"
+
+#: controllers/IndexController.php:193 views/admin/index/show.php:20
+msgid "Specificity"
+msgstr "Spécificité du public"
+
+#: controllers/IndexController.php:201 views/admin/index/show.php:21
+msgid "Education level"
+msgstr "Niveau d'éducation"
+
+#: controllers/IndexController.php:209 views/admin/index/show.php:22
+msgid "Other objectives"
+msgstr "Sous-objectifs"
+
+#: controllers/IndexController.php:226
+msgid "Associations"
+msgstr "Associations"
+
+#: controllers/IndexController.php:227
+msgid "This package can be associated with the following item(s)"
+msgstr "Ce paquet peut être associé avec les contenus suivants"
+
+#: controllers/IndexController.php:256 views/admin/index/show.php:38
+msgid "Content"
+msgstr "Contenu"
+
+#: controllers/IndexController.php:257
+msgid "Only checked items will be saved as package content."
+msgstr ""
+"Seuls les éléments cochés seront enregistrés en tant que contenu du paquet"
+
+#: controllers/IndexController.php:282
+msgid "There was an error on the form. Please try again."
+msgstr "Des erreurs ont été détectées. Veuillez recommencer."
+
+#: controllers/IndexController.php:290
+#, php-format
+msgid "The package \"%s\" has been added."
+msgstr "Le paquet \"%s\" a été ajouté."
+
+#: controllers/IndexController.php:292
+#, php-format
+msgid "The package \"%s\" has been updated."
+msgstr "Le paquet \"%s\" a été mis à jour."
+
+#: models/PackageManagerPackage.php:92
+msgid "The package must be given a name."
+msgstr "Vous devez donner un nom à ce paquet."
+
+#: models/PackageManagerPackage.php:95
+msgid "The package must be given a description."
+msgstr "Vous devez indiquer une description du paquet."
+
+#: models/PackageManagerPackage.php:99
+msgid "The name for your package must be 255 characters or less."
+msgstr "Le nom du paquet doit faire 255 caractères ou moins."
+
+#: models/PackageManagerPackage.php:103
+msgid "The name is already in use by another package. Please choose another."
+msgstr ""
+"Ce nom est déjà utilisé par un autre paquet. Veuillez en choisir un autre."
+
+#: views/admin/cart/browse.php:3
+msgid "Your cart"
+msgstr "Votre panier"
+
+#: views/admin/cart/browse.php:11
+msgid "Your cart is empty"
+msgstr "Votre panier est vide"
+
+#: views/admin/cart/browse.php:12 views/admin/index/browse.php:14
+msgid "Select items"
+msgstr "Choisir du contenu"
+
+#: views/admin/cart/browse.php:14
+msgid "Currently in cart"
+msgstr "Actuellement dans votre panier"
+
+#: views/admin/cart/browse.php:36
+msgid "Create Package from basket"
+msgstr "Créer un paquet depuis le panier"
+
+#: views/admin/cart/browse.php:37
+msgid "Clear Basket"
+msgstr "Vider le panier"
+
+#: views/admin/index/add.php:3 views/admin/index/browse.php:17
+msgid "Add a Package"
+msgstr "Ajouter un Paquet"
+
+#: views/admin/index/browse-list.php:8
+msgid "Last Modified"
+msgstr "Dernière Modification"
+
+#: views/admin/index/browse-list.php:9
+msgid "Total Number of Items"
+msgstr ""
+
+#: views/admin/index/browse-list.php:25 views/admin/index/show.php:75
+msgid "Edit"
+msgstr "Modifier"
+
+#: views/admin/index/browse-list.php:28 views/admin/index/show.php:78
+msgid "Delete"
+msgstr "Supprimer"
+
+#: views/admin/index/browse-list.php:34
+#, php-format
+msgid "by <strong>%1$s</strong> on %2$s"
+msgstr "par <strong>%1$s</strong> le %2$s"
+
+#: views/admin/index/browse.php:3
+msgid "Browse packages"
+msgstr "Parcourir les paquets"
+
+#: views/admin/index/browse.php:9
+msgid "You have no packages."
+msgstr "Vous n'avez aucun paquet."
+
+#: views/admin/index/browse.php:11
+msgid "Add your first package."
+msgstr "Ajoutez votre premier paquet."
+
+#: views/admin/index/browse.php:18
+#, php-format
+msgid "you have one item in your cart"
+msgid_plural "you have %d items in your cart"
+msgstr[0] "vous avez 1 élément dans votre panier"
+msgstr[1] "vous avez %d éléments dans votre panier"
+
+#: views/admin/index/edit.php:3
+#, php-format
+msgid "Update package \"%s\""
+msgstr "Mise à jour du paquet \"%s\""
+
+#: views/admin/index/show.php:33
+msgid "Related"
+msgstr "Associations"
+
+#: views/admin/index/show.php:63
+msgid "Push content to Cart"
+msgstr "Ajouter le contenu du paquet au panier"
+
+#: views/admin/index/show.php:65
+msgid "No content"
+msgstr "Aucun contenu"
+
+#: views/admin/index/show.php:83
+msgid "Export Package"
+msgstr "Export du paquet"
+
+#: views/admin/relationship.php:6
+msgid "This item is part of the following packages"
+msgstr "Ce contenu fait partie des paquets suivants"
+
+#: views/admin/relationship.php:8
+msgid "This item is associated with the following packages"
+msgstr "Ce contenu est associé aux paquets suivants"
+
+#: views/admin/relationship.php:18
+msgid "No package"
+msgstr "Aucun paquet"
+
+#: views/helpers/AddToCart.php:7
+msgid "Add to cart"
+msgstr "Ajouter au panier"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#~ msgid "Export CSV inline ?"
+#~ msgstr "Export CSV en ligne"
+
+#~ msgid "If checked, package csv export will be inline."
+#~ msgstr "Si coché, l'export csv du paquet sera affiché en ligne"
