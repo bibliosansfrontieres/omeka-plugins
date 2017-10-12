@@ -8,8 +8,8 @@ foreach($contents as $item_id){
 	if(!$item || empty($item)) continue;
 	$preview = $item->Files;
 	$fields = array(
-		html_entity_decode(metadata($item, array('Dublin Core', 'Title')), ENT_QUOTES | ENT_XHTML, 'UTF-8'),
-		html_entity_decode(metadata($item, array('Dublin Core', 'Description')), ENT_QUOTES | ENT_XHTML, 'UTF-8'),
+		html_entity_decode(metadata($item, array('Dublin Core', 'Title'), array('no_escape'=>true)), ENT_QUOTES | ENT_XHTML, 'UTF-8'),
+		html_entity_decode(metadata($item, array('Dublin Core', 'Description'), array('no_escape'=>true)), ENT_QUOTES | ENT_XHTML, 'UTF-8'),
 		strip_formatting(metadata($item, array('Dublin Core', 'Language'))),
 		metadata($item, array('Dublin Core', 'Creator')),
 		tag_string($item, null, ','),
