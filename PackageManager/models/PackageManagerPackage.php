@@ -95,8 +95,8 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
             $this->addError('name', __('The package must be given a description.'));
         }        
         
-        if (255 < strlen($this->name)) {
-            $this->addError('name', __('The name for your package must be 255 characters or less.'));
+        if (100 < strlen($this->name)) {
+            $this->addError('name', __('The name for your package must be 100 characters or less.'));
         }
         
         if (!$this->fieldIsUnique('name')) {
