@@ -24,6 +24,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
     public $other_objectives;
     public $slug;
     public $modified;
+    public $last_exportable_modification;
     public $added;
     public $owner_id;
 	
@@ -113,10 +114,10 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
         $this->description = trim($this->description);
         // Generate slug from package name.
         $this->slug = $this->_generateSlug($this->name);
-        
+
         // $this->modified_by_user_id = current_user()->id;
     }
-	
+
     /**
      * Delete records that are associated with this Package.
      */

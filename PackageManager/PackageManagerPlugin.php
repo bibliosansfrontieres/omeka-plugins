@@ -143,6 +143,23 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 			$db->query($sql); 
 			set_option('package_manager_item_type_relation', $this->_options['package_manager_item_type_relation']);
 		}
+
+		if (version_compare($oldVersion, '1.0.7', '<')) {
+			// create new field last_exportable_modification
+			$sql = "
+			ALTER TABLE `".$db->PackageManagerPackage."`
+			ADD `last_exportable_modification` timestamp NOT NULL DEFAULT '1999-12-31 23:00:00';
+			";
+			$db->query($sql);
+
+            // add initial values for field last_exportable_modification
+            // (`modified`=`modified` is here to prevent this field's ON UPDATE update)
+			$sql = "
+			UPDATE `".$db->PackageManagerPackage."`
+			SET `last_exportable_modification` = `modified`, `modified` = `modified`;
+			";
+			$db->query($sql);
+		}
     }
 
     /**
