@@ -9,7 +9,9 @@ echo flash();
 
 <section class="seven columns alpha">
     <?php echo flash(); ?>
-	<small class='right'><?php echo __('Last update');?> : <?php echo metadata('package_manager_package', 'modified');?></small>
+    <small class='right'><?php echo __('Last exportable update');?> : <?php echo metadata('package_manager_package', 'last_exportable_modification');?></small>
+    <small class='right'>&nbsp; - &nbsp;</small>
+    <small class='right'><?php echo __('Last update');?> : <?php echo metadata('package_manager_package', 'modified');?></small>
 	<h2><?php echo __('Description');?></h2>
 	<p><?php echo metadata('package_manager_package', 'description');?><p>
 
