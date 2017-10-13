@@ -115,7 +115,20 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
         // Generate slug from package name.
         $this->slug = $this->_generateSlug($this->name);
 
+        // Check whether last_exportable_modification should be updated
+        $storedObject = get_record_by_id('PackageManagerPackage', $this->id);
+        if( $this->_isExportableEdit($storedObject, $this->_postData) ){
+            $this->last_exportable_modification = date('Y-m-d H:i:s');
+        }
         // $this->modified_by_user_id = current_user()->id;
+    }
+
+    function _isExportableEdit($storedObject, $formObject) {
+        $contents = array_map(function($o) {return $o->item_id;}, $storedObject->Contents);
+        return ( ($storedObject['name'] != $formObject['name'])
+            || ($storedObject['description'] != $formObject['description'])
+            || ! package_manager_array_same_content($contents, $formObject['items'])
+        );
     }
 
     /**
