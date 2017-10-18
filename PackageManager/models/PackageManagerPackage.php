@@ -95,7 +95,10 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
 		if (empty($this->description)) {
             $this->addError('name', __('The package must be given a description.'));
         }        
-        
+		if (empty($this->language)) {
+            $this->addError('name', __('The package must be given a language.'));
+        }
+
         if (100 < strlen($this->name)) {
             $this->addError('name', __('The name for your package must be 100 characters or less.'));
         }
@@ -113,7 +116,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
         $this->name = trim($this->name);
         $this->description = trim($this->description);
         // Generate slug from package name.
-        $this->slug = $this->_generateSlug($this->name);
+        $this->slug = $this->_generateSlug($this->name.'-'.$this->language);
 
         // Check whether last_exportable_modification should be updated
         $storedObject = get_record_by_id('PackageManagerPackage', $this->id);

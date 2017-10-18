@@ -175,6 +175,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
                 'id' => 'package-manager-package-language',
                 'value' => $package->language,
                 'label' => __('Language'),
+                'required' => true
             )
         );
         $form->addElementToEditGroup(
