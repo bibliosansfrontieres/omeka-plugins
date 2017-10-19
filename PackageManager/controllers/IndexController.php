@@ -223,13 +223,13 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 			$current_relations = array_map(function($o) {
 						return $o->item_id;
 					}, $package->Relations);
-			$form->addElementToEditGroup('multiselect', 'relations', array(
+			$form->addElementToEditGroup('multiCheckbox', 'relations', array(
 				'label'=> __('Associations'),
 				'description'=> __('This package can be associated with the following item(s)'),
 				'value'=> $current_relations,
 				'multiOptions' => $relations_items,
-				'class' => "element-id",
-				'order' => $order++,		
+				'class' => "pm-cbox",
+				'order' => $order++,
 			));
 		}
 	
