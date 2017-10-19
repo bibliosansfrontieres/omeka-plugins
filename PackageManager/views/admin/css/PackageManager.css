@@ -1,0 +1,6 @@
+
+form .field > .five.columns{
+    max-height:250px;
+    overflow-y:auto;
+}
+

@@ -292,6 +292,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
         queue_js_url('https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js');
 		queue_js_string('Omeka.pm_cart_url = "'.$cart_url.'";');
 		queue_js_file('pm');
+        queue_css_file('PackageManager');
     }
 
     /**
