@@ -16,6 +16,7 @@ echo flash();
 	<p><?php echo metadata('package_manager_package', 'description');?><p>
 
 	<div class="details" style="margin:15px 0 15px 0">
+		<p><strong><?php echo __('Ideascube Name');?></strong> : <?php echo metadata('package_manager_package', 'ideascube_name');?></p>
 		<p><strong><?php echo __('Goal');?></strong> : <?php echo metadata('package_manager_package', 'global_objective');?></p>
 		<p><strong><?php echo __('Audience');?></strong> : <?php echo metadata('package_manager_package', 'audience');?></p>
 		<p><strong><?php echo __('Language');?></strong> : <?php echo metadata('package_manager_package', 'language');?></p>

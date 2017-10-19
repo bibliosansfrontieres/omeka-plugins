@@ -207,7 +207,7 @@ class BsfCompanionPlugin extends Omeka_Plugin_AbstractPlugin
 		
 		$arguments = array(
 			"package-id"  => $view->package_manager_package->slug,
-			"name"        => str_replace('"', '\"', $view->package_manager_package->name),
+			"name"        => str_replace('"', '\"', $view->package_manager_package->ideascube_name),
 			"description" => str_replace('"', '\"', $view->package_manager_package->description),
 			"language"    => str_replace('"', '\"', $view->package_manager_package->language),
 			"url"         => get_option('bsf_companion_url_prefix') . $package_file,

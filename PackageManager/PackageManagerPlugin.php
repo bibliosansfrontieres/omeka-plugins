@@ -160,6 +160,23 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 			";
 			$db->query($sql);
 		}
+
+		if (version_compare($oldVersion, '1.0.8', '<')) {
+			// create new field last_exportable_modification
+			$sql = "
+			ALTER TABLE `".$db->PackageManagerPackage."`
+			ADD `ideascube_name` tinytext COLLATE utf8_unicode_ci  AFTER `name`;
+			";
+			$db->query($sql);
+
+            // add initial values for field last_exportable_modification
+            // (`modified`=`modified` is here to prevent this field's ON UPDATE update)
+			$sql = "
+			UPDATE `".$db->PackageManagerPackage."`
+			SET `ideascube_name` = `name`, `modified` = `modified`;
+			";
+			$db->query($sql);
+		}
     }
 
     /**

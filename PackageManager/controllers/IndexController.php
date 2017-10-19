@@ -136,10 +136,20 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
                 'id' => 'package-manager-package-name',
                 'value' => $package->name,
                 'label' => __('Name'),
-                'description' => __('Name of the package (required)'),
+                'description' => __('Package name for Omeka (required)'),
                 'required' => true
             )
         );	
+        $form->addElementToEditGroup(
+            'text', 'ideascube_name',
+            array(
+                'id' => 'package-manager-package-ideascube-name',
+                'value' => $package->ideascube_name,
+                'label' => __('IdeasCube Name'),
+                'description' => __('Package name for IdeasCube (required)'),
+                'required' => true
+            )
+        );
         $form->addElementToEditGroup(
             'textarea', 'description',
             array(
