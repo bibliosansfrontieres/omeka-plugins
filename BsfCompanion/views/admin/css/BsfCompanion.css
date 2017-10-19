@@ -1,0 +1,10 @@
+/*
+ Container for "copy YAML to clipboard" feature. (on Admin Package Show Sidebar)
+ This container cannot be hidden or invisible, since its content will be "select()ed" by copyTagContentToClipboard()
+*/
+#plugin_bsfcompanion_export_yaml_raw{
+    width:1px;
+    height:1px;
+    position:absolute;
+    top:-10px;
+}

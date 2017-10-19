@@ -24,6 +24,10 @@
 						echo"</ul>";
 					}
 				?>
+                <?php if(isset($view->report['content']['_yaml_raw']) && !empty($view->report['content']['_yaml_raw'])):?>
+                    <button class="right" onclick="copyTagContentToClipboard('plugin_bsfcompanion_export_yaml_raw')">Copy YAML to clipboard</button>
+                    <textarea id="plugin_bsfcompanion_export_yaml_raw"><?php echo $view->report['content']['_yaml_raw']; ?></textarea>
+			    <?php endif;?>
 			<?php endif;?>
         </div>
     </div>	
