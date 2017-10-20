@@ -77,7 +77,7 @@ class PackageManager_CartController extends Omeka_Controller_AbstractActionContr
 		$status = "ok";
 		$ids = ($this->getParam('id'))?:$this->getParam('items');
         $batchAll = (boolean) $this->_getParam('batch-all');
-		
+
 		try{
 			// Process Batch All items.
 			if ($batchAll) {
@@ -116,14 +116,24 @@ class PackageManager_CartController extends Omeka_Controller_AbstractActionContr
 		catch (Omeka_Validate_Exception $e) {
 			$status = "ko";
 			$result = $e->getMessage();
-		}		
+		}
+
+        $addToPackage = (null != $this->_getParam('submit_add_to_package'));
+        if($addToPackage){
+            $packageId = $this->_getParam('pm_target_package');
+            if($packageId>0){
+                $status = 'redirect';
+                $result = url("package-manager/index/edit/id/$packageId");
+            }
+        }
+
 		$response = array("status"=>$status, "result"=>$result);			
 
 		// $this->view->data = Zend_Json::encode($response);	
 		echo Zend_Json::encode($response);	
 		$this->_helper->viewRenderer->setNoRender(true);
     }
-	
+
 	public function pushAction()
     {
 		$package_id = $this->getParam('id');

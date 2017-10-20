@@ -4,3 +4,16 @@ form .field > .five.columns{
     overflow-y:auto;
 }
 
+.pm_batch_add_to_package{
+    display:inline;
+    white-space:nowrap;
+}
+
+.pm_batch_add_to_package select{
+    display:inline;
+    width:200px;
+}
+
+select[disabled]{
+    opacity: .35;
+}
