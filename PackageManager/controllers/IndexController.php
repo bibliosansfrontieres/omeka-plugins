@@ -15,7 +15,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 {
 	protected $session;
 	protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
-	
+
     public function init()
     {
         // Set the model class so this controller can perform some functions, 
@@ -23,27 +23,27 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
         $this->_helper->db->setDefaultModelName('PackageManagerPackage');
 		$this->session = new Zend_Session_Namespace('pm_cart');
     }
-    
+
     public function indexAction()
     {
         // Always go to browse.
         $this->_helper->redirector('browse');
         return;
     }
-	
+
     public function browseAction()
     {
 		$this->view->nb_items_in_cart = (!is_array($this->session->cart) || empty($this->session->cart)) ? 0 : count($this->session->cart);
-		parent::browseAction(); 	
+		parent::browseAction();
 	}
-		
+
     public function showAction()
     {
         // Get the requested package.
 		$package = $this->_helper->db->findById();
  		$contents = array_map(function($o) {
 						return $o->item_id;
-					}, $package->Contents);			
+					}, $package->Contents);
 		$this->view->package_manager_package = $package;
 		$this->view->contents = $contents;
 		$this->view->export_fields = unserialize(get_option('package_manager_export_fields'));
@@ -53,10 +53,10 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 			if(!get_option('package_manager_export_inline')){
 				switch($output_type){
 					case 'csv':
-						$this->getResponse()->setHeader('Content-Type', 'text/csv; charset=utf-8', true);			
+						$this->getResponse()->setHeader('Content-Type', 'text/csv; charset=utf-8', true);
 					break;
 					case 'yaml':
-						$this->getResponse()->setHeader('Content-Type', 'application/yaml; charset=utf-8', true);			
+						$this->getResponse()->setHeader('Content-Type', 'application/yaml; charset=utf-8', true);
 					break;
 					case 'object': // Unable to set it as JSON (default Zend output type)
 						$this->getResponse()->setHeader('Content-Type', 'application/json; charset=utf-8', true);
@@ -66,14 +66,14 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 				$this->getResponse()->setHeader('Content-disposition', 'attachment; filename="'.metadata('package_manager_package', 'slug').'.'.$output_type.'"', true);
 			}
 		}
-		// parent::showAction(); 	
+		// parent::showAction();
 	}
-	
+
     public function addAction()
     {
         if(!is_array($this->session->cart) || empty($this->session->cart)){
 			$this->_helper->flashMessenger(__('You must add item(s) in your cart before creating a package'), 'error');
-			$this->_helper->redirector('browse');		
+			$this->_helper->redirector('browse');
 		}
 
         // Create a new package.
@@ -82,7 +82,31 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
         $this->view->form = $form;
         $this->_processPackageForm($package, $form, 'add');
     }
-	
+
+    public function addItemsAction()
+    {
+        // Get the requested package.
+        $package = $this->_helper->db->findById();
+        $packageId = $package->id;
+        $contentsTable = get_db()->getTable('PackageManagerPackagesContents');
+
+        foreach ($_POST['itemsIds'] as $itemId) {
+            if($contentsTable->findByAssoc($itemId, $packageId) == null){
+                $assoc = new PackageManagerPackagesContents;
+                $assoc->package_id = $packageId;
+                $assoc->item_id = $itemId;
+                $assoc->save();
+            }
+        }
+        $response = array(
+            "status"=>'redirect',
+            "result"=>url("package-manager/index/show/id/$packageId")
+        );
+
+        echo Zend_Json::encode($response);
+        $this->_helper->viewRenderer->setNoRender(true);
+    }
+
     public function editAction()
     {
         // Get the requested package.
@@ -97,9 +121,9 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
             $this->_forward('method-not-allowed', 'error', 'default');
             return;
         }
-        
+
         $record = $this->_helper->db->findById();
-                
+
         $form = $this->_getDeleteForm();
         if ($form->isValid($_POST)) {
             $record->delete();
@@ -107,28 +131,28 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
         } else {
             throw new Omeka_Controller_Exception_404;
         }
-                
+
         if (isset($successMessage)) {
             $this->_helper->flashMessenger($successMessage, 'success');
         }
         $this->_redirectAfterDelete($record);
     }
-	
+
     protected function _getForm($package = null)
-    { 
+    {
         $formOptions = array('type' => 'package_manager_package');
         if ($package && $package->exists()) {
             $formOptions['record'] = $package;
 			$contents = array_map(function($o) {
 						return $o->item_id;
-					}, $package->Contents);	
+					}, $package->Contents);
 			$add_from_cart = array_diff((array) $this->session->cart, $contents);
         }
 		else{
 			$contents = $this->session->cart;
 		}
 
-        
+
         $form = new Omeka_Form_Admin($formOptions);
         $form->addElementToEditGroup(
             'text', 'name',
@@ -139,7 +163,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
                 'description' => __('Package name for Omeka (required)'),
                 'required' => true
             )
-        );	
+        );
         $form->addElementToEditGroup(
             'text', 'ideascube_name',
             array(
@@ -222,7 +246,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
                 'rows'  => 10,
 			)
         );
-		
+
 		if(get_option('package_manager_enable_simple_vocab_filter'))
 			$form = $this->_process_simple_vocab_form_filter( $form );
 
@@ -242,7 +266,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 				'order' => $order++,
 			));
 		}
-	
+
 		$itemCheckboxes = array();
 		foreach ($contents as $id) {
 			if (!($item = get_record_by_id('item', $id))) {
@@ -271,15 +295,15 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 			'class' => "pm-cbox",
 			'required' => true,
 			'order'=>100,
-		));	
-        
+		));
+
         if (class_exists('Omeka_Form_Element_SessionCsrfToken')) {
             $form->addElement('sessionCsrfToken', 'csrf_token');
         }
-       
+
         return $form;
     }
-	
+
     /**
      * Process the package add and edit forms.
      */
@@ -295,14 +319,14 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
             }
             try {
                 $package->setPostData($_POST);
-                if ($package->save()) {		
+                if ($package->save()) {
 					$this->session->cart = array(); // clear cart
                     if ('add' == $action) {
                         $this->_helper->flashMessenger(__('The package "%s" has been added.', $package->name), 'success');
                     } else if ('edit' == $action) {
                         $this->_helper->flashMessenger(__('The package "%s" has been updated.', $package->name), 'success');
                     }
-                    
+
                     $this->_helper->redirector('browse');
                     return;
                 }
@@ -319,17 +343,17 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 	private function _process_simple_vocab_form_filter( $form = false ) {
 		// Verify entry
 		if(!$form || !($form instanceof Omeka_Form_Admin)) return $form;
-		
+
 		// SimpleVocab plugin installed AND activated
-		$plugins = Zend_Registry::get('pluginloader');	
+		$plugins = Zend_Registry::get('pluginloader');
 		$simple_vocab = $plugins->getPlugin('SimpleVocab');
 		if(is_null($simple_vocab) || $simple_vocab->active != 1) return $form;
-	
+
 		// SimpleVocab table exists
 		$db = get_db();
-		$nb = $db->query("SHOW TABLES LIKE '".$db->SimpleVocabTerm."'")->fetchAll(); 
+		$nb = $db->query("SHOW TABLES LIKE '".$db->SimpleVocabTerm."'")->fetchAll();
 		if(count( $nb ) !== 1) return $form;
-	
+
 		$select = $db->getTable('SimpleVocabTerm')->getSelect()
 			->reset(Zend_Db_Select::COLUMNS)
 			->columns(array('element_id', 'terms'));
@@ -344,7 +368,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 		$order = 0;
 		foreach($elements as $element => $value){
 			if(array_key_exists($element, $possible_terms)){
-				$attr = $form->getElement($element)->getAttribs() + 
+				$attr = $form->getElement($element)->getAttribs() +
 						array(
 							'label' => $form->getElement($element)->getLabel(),
 							'value' => $form->getElement($element)->getValue(),
@@ -355,7 +379,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 				$form->addElementToEditGroup(
 					'select', $element,
 					$attr
-				);			
+				);
 			}
 			else $form->getElement($element)->setOrder(++$order);
 		}
