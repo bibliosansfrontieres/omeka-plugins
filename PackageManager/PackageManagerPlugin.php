@@ -19,7 +19,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
 		'install', 'uninstall', 'upgrade', 'initialize',
         'define_acl', 'config_form', 'config','after_delete_record',
-		'admin_items_browse_simple_each', 'admin_items_browse',
+		'admin_items_browse_simple_each',
 		'admin_items_show','admin_head','admin_items_show_sidebar'
 		);
 
@@ -297,12 +297,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 			}
 		}
     }
-
-    public function hookAdminItemsBrowse($args){
-        $allPackagesNames = get_db()->getTable('PackageManagerPackage')->findNamesForAll();
-        echo get_view()->batchAddToPackage($allPackagesNames, $args['view']);
-    }
-
+	
     /**
      * Print out the Package Manager JS file.
      */

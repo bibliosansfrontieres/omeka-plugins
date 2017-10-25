@@ -56,15 +56,5 @@ class Table_PackageManagerPackage extends Omeka_Db_Table
 			->columns(array("package_manager_packages.id", "package_manager_packages.name"))
 			->where('package_manager_package_relations.item_id = ?', (int) $itemId);
 		return $this->fetchObjects($select);
-    }
-
-    public function findNamesForAll()
-    {
-        $data = [];
-		$records =  $this->findAll();
-		foreach($records as $record){
-		    $data[$record['id']] =$record['name'];
-        }
-		return $data;
-    }
+    }	
 }
