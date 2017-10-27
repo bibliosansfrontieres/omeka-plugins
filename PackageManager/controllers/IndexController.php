@@ -66,6 +66,18 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 				$this->getResponse()->setHeader('Content-disposition', 'attachment; filename="'.metadata('package_manager_package', 'slug').'.'.$output_type.'"', true);
 			}
 		}
+        $requiredItemFileds = array(
+            'Dublin Core' => array('Title', 'Description', 'Creator', 'Language'),
+            'Item Type Metadata' => array('Path'),
+        );
+        $results = array();
+        $this->view->incompleteItems = array();
+        foreach (array_keys($requiredItemFileds) as $scope) {
+            foreach ($requiredItemFileds[$scope] as $field) {
+                $results[$field] = $this->findIncompleteItemsInPackage($package, $field, $scope);
+                if( !empty($results[$field])){ $this->view->incompleteItems[$field] =$results[$field];}
+            }
+        }
 		// parent::showAction();
 	}
 
@@ -385,4 +397,23 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 		}
 		return $form;
 	}
+
+    /**
+     * Find items with missing field in a package.
+     *
+     * @param $package
+     * @param $field
+     * @param string $elementSet
+     * @return array
+     */
+    protected function _findIncompleteItemsInPackage($package, $field, $elementSet='Dublin Core'){
+        $item_ids = array_map(function($o) {return $o->item_id;}, $package->Contents);
+	    $result = array();
+            foreach ($item_ids as $item_id) {
+                $item = get_record_by_id('item', $item_id);
+                $value = metadata($item, array($elementSet, $field));
+                if($value==null){array_push($result, $item->id);}
+            }
+        return $result;
+    }
 }

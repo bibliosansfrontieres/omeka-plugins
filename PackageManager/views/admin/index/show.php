@@ -85,6 +85,16 @@ echo flash();
 
     <div class="panel">
         <h4><?php echo __('Export Package'); ?></h4>
+        <?php foreach(array_keys($incompleteItems) as $field): ?>
+            <?php if( !empty($incompleteItems[$field])): ?>
+                <div class="pm_warning_incomplete_items"><b>Warning</b> : following items lack a "<?php echo $field ?>" value. <b>Export will fail</b>.
+                    <?php foreach($incompleteItems[$field] as $item_id){
+                        $item = get_record_by_id('item', $item_id);
+                        echo '<br/> - '.link_to_item(metadata($item, array('Dublin Core', 'Title')), array(), 'show', $item);
+                    };?>
+                </div>
+            <?php endif;?>
+        <?php endforeach;?>
         <div><?php echo output_format_list(false); ?></div>
     </div>
 	

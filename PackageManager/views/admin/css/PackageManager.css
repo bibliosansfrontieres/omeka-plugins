@@ -18,3 +18,10 @@ select[disabled]{
     opacity: .35;
 }
 
+.pm_warning_incomplete_items{
+    border: 1px #ad6345 solid;
+    color: #ad6345;
+    margin : 4px 0px;
+    padding : 4px 6px;
+}
+
