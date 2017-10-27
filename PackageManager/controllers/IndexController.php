@@ -110,6 +110,15 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
                 $assoc->save();
             }
         }
+        // Updating last_exportable_modification
+        // using insert() instead of save() to avoid pre/post callbacks
+        $package->last_exportable_modification = date('Y-m-d H:i:s');
+        get_db()->insert(get_class($package), $package->toArray());
+
+        // add flash message for UX
+        $itemsCount = count($_POST['itemsIds']);
+        $this->_helper->flashMessenger($itemsCount.__(" items successfully added to package"), 'success');
+
         $response = array(
             "status"=>'redirect',
             "result"=>url("package-manager/index/show/id/$packageId")
