@@ -74,7 +74,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
         $this->view->incompleteItems = array();
         foreach (array_keys($requiredItemFileds) as $scope) {
             foreach ($requiredItemFileds[$scope] as $field) {
-                $results[$field] = $this->findIncompleteItemsInPackage($package, $field, $scope);
+                $results[$field] = $this->_findIncompleteItemsInPackage($package, $field, $scope);
                 if( !empty($results[$field])){ $this->view->incompleteItems[$field] =$results[$field];}
             }
         }
