@@ -6,5 +6,17 @@
     width:1px;
     height:1px;
     position:absolute;
-    top:-10px;
+    top:-1000px;
+}
+
+.bsfcompanion_error_message,
+.bsfcompanion_error_message a{
+    color:#fff;
+    background-color: #ad6345;
+    margin: 4px 0px;
+    padding: 4px 6px;
+}
+.bsfcompanion_error_message a{
+    text-decoration: underline;
+    font-weight:bold;
 }

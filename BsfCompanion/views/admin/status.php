@@ -6,7 +6,14 @@
 			<hr/>
 			<?php if(isset($view->report['error']) && !empty($view->report['error'])):?> 
 				<div class="plugins browse">
-				<p class="error cannotload"><?php echo $view->report['error'];?></p>
+                    <p class="error cannotload">
+                        <div id="bsfcompanion_error_report" style="display:none">
+                            <pre style="font-size:small; text-align: left; overflow: auto;"><?php echo $view->report['error'];?></pre>
+                        </div>
+                        <div class="bsfcompanion_error_message">
+                            Export failed ! <a class="bsfcompanion_show_errors" href="#">Show errors</a>
+                        </div>
+                    </p>
 				</div>
 			<?php endif;?>
 			<?php if(isset($view->report['content']) && !empty($view->report['content'])):?>
