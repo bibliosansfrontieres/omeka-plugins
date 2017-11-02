@@ -14,6 +14,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
 {
 
     public $name;
+    public $ideascube_name;
     public $description;
     public $global_objective;
     public $audience;
@@ -24,6 +25,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
     public $other_objectives;
     public $slug;
     public $modified;
+    public $last_exportable_modification;
     public $added;
     public $owner_id;
 	
@@ -91,14 +93,23 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
         if (empty($this->name)) {
             $this->addError('name', __('The package must be given a name.'));
         }
+        if (empty($this->ideascube_name)) {
+            $this->addError('name', __('The package must be given a name for IdeasCube.'));
+        }
 		if (empty($this->description)) {
             $this->addError('name', __('The package must be given a description.'));
         }        
-        
-        if (255 < strlen($this->name)) {
-            $this->addError('name', __('The name for your package must be 255 characters or less.'));
+		if (empty($this->language)) {
+            $this->addError('name', __('The package must be given a language.'));
         }
-        
+
+        if (100 < strlen($this->name)) {
+            $this->addError('name', __('The name for your package must be 100 characters or less.'));
+        }
+        if (100 < strlen($this->ideascube_name)) {
+            $this->addError('name', __('The IdeasCube\'s name for your package must be 100 characters or less.'));
+        }
+
         if (!$this->fieldIsUnique('name')) {
             $this->addError('name', __('The name is already in use by another package. Please choose another.'));
         }
@@ -110,13 +121,28 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
     protected function beforeSave($args)
     {
         $this->name = trim($this->name);
+        $this->ideascube_name = trim($this->ideascube_name);
         $this->description = trim($this->description);
         // Generate slug from package name.
-        $this->slug = $this->_generateSlug($this->name);
-        
+        $this->slug = $this->_generateSlug($this->name.'-'.$this->language);
+
+        // Check whether last_exportable_modification should be updated
+        $storedObject = get_record_by_id('PackageManagerPackage', $this->id);
+        if( $this->_isExportableEdit($storedObject, $this->_postData) ){
+            $this->last_exportable_modification = date('Y-m-d H:i:s');
+        }
         // $this->modified_by_user_id = current_user()->id;
     }
-	
+
+    function _isExportableEdit($storedObject, $formObject) {
+        $contents = array_map(function($o) {return $o->item_id;}, $storedObject->Contents);
+        return ( ($storedObject['name'] != $formObject['name'])
+            || ($storedObject['ideascube_name'] != $formObject['ideascube_name'])
+            || ($storedObject['description'] != $formObject['description'])
+            || ! package_manager_array_same_content($contents, $formObject['items'])
+        );
+    }
+
     /**
      * Delete records that are associated with this Package.
      */
@@ -178,6 +204,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
 		}
         $this->setSearchTextTitle( $this->name );
         $this->addSearchText($this->name);
+        $this->addSearchText($this->ideascube_name);
         $this->addSearchText($this->description);
         $this->addSearchText($this->global_objective);
         $this->addSearchText($this->audience);

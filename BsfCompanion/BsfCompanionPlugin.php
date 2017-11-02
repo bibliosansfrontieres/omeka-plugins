@@ -20,6 +20,7 @@ class BsfCompanionPlugin extends Omeka_Plugin_AbstractPlugin
 		'config_form', 'config',
 		'admin_package_show_sidebar',
 		'admin_package_export_json', // La commande n'est lancée que pour le json
+        'admin_head',
 		// 'admin_package_export_csv',
 		// 'admin_package_export_yaml',
 	);
@@ -115,6 +116,7 @@ class BsfCompanionPlugin extends Omeka_Plugin_AbstractPlugin
 				$yaml = implode("\r\n", array_slice($trimmed_content, $yaml_index + 1))."\r\n";
 				$yaml_array = spyc_load($yaml);
 				$content = current($yaml_array['all']);
+				$content['_yaml_raw'] = substr($yaml, strpos($yaml, "all:\r\n")+strlen("all:\r\n"));
 				$content['_result'] = array_pop($meta);
 				$err = array();
 				foreach($meta as $key=>$val){
@@ -162,7 +164,16 @@ class BsfCompanionPlugin extends Omeka_Plugin_AbstractPlugin
     {
 		$this->launchCustomCommand($args, "yaml");
     }
-	
+
+    /**
+     * Add external js/css files
+     */
+    public function hookAdminHead()
+    {
+        queue_js_file('BsfCompanion');
+        queue_css_file('BsfCompanion');
+    }
+
 	protected function launchCustomCommand($args, $type = false){
         $view = $args['view'];
         $data = $args['data'];
@@ -196,7 +207,7 @@ class BsfCompanionPlugin extends Omeka_Plugin_AbstractPlugin
 		
 		$arguments = array(
 			"package-id"  => $view->package_manager_package->slug,
-			"name"        => str_replace('"', '\"', $view->package_manager_package->name),
+			"name"        => str_replace('"', '\"', $view->package_manager_package->ideascube_name),
 			"description" => str_replace('"', '\"', $view->package_manager_package->description),
 			"language"    => str_replace('"', '\"', $view->package_manager_package->language),
 			"url"         => get_option('bsf_companion_url_prefix') . $package_file,

@@ -38,6 +38,12 @@ function package_manager_array_to_csv( array &$fields, $delimiter = ';', $enclos
     return implode( $delimiter, $output );
 }
 
+
+function package_manager_array_same_content($a, $b) {
+    return (empty(array_diff($a, $b)) && empty(array_diff($b, $a)));
+}
+
+
 require_once("Spyc.php");
 
 class Zend_Form_Element_Html extends Zend_Form_Element_Xhtml {

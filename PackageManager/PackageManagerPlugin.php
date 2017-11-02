@@ -19,9 +19,9 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
 		'install', 'uninstall', 'upgrade', 'initialize',
         'define_acl', 'config_form', 'config','after_delete_record',
-		'admin_items_browse_simple_each',
-		'admin_items_show','admin_head','admin_items_show_sidebar'
-		);
+        'admin_items_browse_simple_each', 'admin_items_browse',
+        'admin_items_show','admin_head','admin_items_show_sidebar'
+    );
 
     /**
      * @var array Filters for the plugin.
@@ -143,6 +143,40 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 			$db->query($sql); 
 			set_option('package_manager_item_type_relation', $this->_options['package_manager_item_type_relation']);
 		}
+
+		if (version_compare($oldVersion, '1.0.7', '<')) {
+			// create new field last_exportable_modification
+			$sql = "
+			ALTER TABLE `".$db->PackageManagerPackage."`
+			ADD `last_exportable_modification` timestamp NOT NULL DEFAULT '1999-12-31 23:00:00';
+			";
+			$db->query($sql);
+
+            // add initial values for field last_exportable_modification
+            // (`modified`=`modified` is here to prevent this field's ON UPDATE update)
+			$sql = "
+			UPDATE `".$db->PackageManagerPackage."`
+			SET `last_exportable_modification` = `modified`, `modified` = `modified`;
+			";
+			$db->query($sql);
+		}
+
+		if (version_compare($oldVersion, '1.0.8', '<')) {
+			// create new field last_exportable_modification
+			$sql = "
+			ALTER TABLE `".$db->PackageManagerPackage."`
+			ADD `ideascube_name` tinytext COLLATE utf8_unicode_ci  AFTER `name`;
+			";
+			$db->query($sql);
+
+            // add initial values for field last_exportable_modification
+            // (`modified`=`modified` is here to prevent this field's ON UPDATE update)
+			$sql = "
+			UPDATE `".$db->PackageManagerPackage."`
+			SET `ideascube_name` = `name`, `modified` = `modified`;
+			";
+			$db->query($sql);
+		}
     }
 
     /**
@@ -263,18 +297,26 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 			}
 		}
     }
-	
+
+    public function hookAdminItemsBrowse($args){
+        $allPackagesNames = get_db()->getTable('PackageManagerPackage')->findNamesForAll();
+        echo get_view()->batchAddToPackage($allPackagesNames, $args['view']);
+    }
+
     /**
      * Print out the Package Manager JS file.
      */
     public function hookAdminHead()
     {
-		$cart_url =  get_view()->addToCart(false, true);
+        $cart_url =  get_view()->addToCart(false, true);
+        $addItems_url =  url("package-manager/index/add-items/id/%d", null, array(), false);;
         queue_css_url('https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css');
-		queue_css_string("input.pm-cbox{margin-right:10px;} a.pm-cart{min-height:16px;background: transparent url(".img('cart.png').") center left no-repeat;padding-left:20px;}");
+        queue_css_string("input.pm-cbox{margin-right:10px;} a.pm-cart{min-height:16px;background: transparent url(".img('cart.png').") center left no-repeat;padding-left:20px;}");
         queue_js_url('https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js');
-		queue_js_string('Omeka.pm_cart_url = "'.$cart_url.'";');
-		queue_js_file('pm');
+        queue_js_string('Omeka.pm_cart_url = "'.$cart_url.'";');
+        queue_js_string('Omeka.pm_addItems_url = "'.$addItems_url.'";');
+        queue_js_file('pm');
+        queue_css_file('PackageManager');
     }
 
     /**

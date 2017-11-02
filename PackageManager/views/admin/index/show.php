@@ -9,11 +9,14 @@ echo flash();
 
 <section class="seven columns alpha">
     <?php echo flash(); ?>
-	<small class='right'><?php echo __('Last update');?> : <?php echo metadata('package_manager_package', 'modified');?></small>
+    <small class='right'><?php echo __('Last exportable update');?> : <?php echo metadata('package_manager_package', 'last_exportable_modification');?></small>
+    <small class='right'>&nbsp; - &nbsp;</small>
+    <small class='right'><?php echo __('Last update');?> : <?php echo metadata('package_manager_package', 'modified');?></small>
 	<h2><?php echo __('Description');?></h2>
 	<p><?php echo metadata('package_manager_package', 'description');?><p>
 
 	<div class="details" style="margin:15px 0 15px 0">
+		<p><strong><?php echo __('Ideascube Name');?></strong> : <?php echo metadata('package_manager_package', 'ideascube_name');?></p>
 		<p><strong><?php echo __('Goal');?></strong> : <?php echo metadata('package_manager_package', 'global_objective');?></p>
 		<p><strong><?php echo __('Audience');?></strong> : <?php echo metadata('package_manager_package', 'audience');?></p>
 		<p><strong><?php echo __('Language');?></strong> : <?php echo metadata('package_manager_package', 'language');?></p>
@@ -82,6 +85,16 @@ echo flash();
 
     <div class="panel">
         <h4><?php echo __('Export Package'); ?></h4>
+        <?php foreach(array_keys($incompleteItems) as $field): ?>
+            <?php if( !empty($incompleteItems[$field])): ?>
+                <div class="pm_warning_incomplete_items"><b>Warning</b> : following items lack a "<?php echo $field ?>" value. <b>Export will fail</b>.
+                    <?php foreach($incompleteItems[$field] as $item_id){
+                        $item = get_record_by_id('item', $item_id);
+                        echo '<br/> - '.link_to_item(metadata($item, array('Dublin Core', 'Title')), array(), 'show', $item);
+                    };?>
+                </div>
+            <?php endif;?>
+        <?php endforeach;?>
         <div><?php echo output_format_list(false); ?></div>
     </div>
 	
