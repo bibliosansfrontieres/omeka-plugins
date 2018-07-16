@@ -43,7 +43,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
     }
 
 
-    protected function getContents()
+    public function getContents()
     {
         return $this->getTable('PackageManagerPackagesContents')->findByPackage($this->id);
     }

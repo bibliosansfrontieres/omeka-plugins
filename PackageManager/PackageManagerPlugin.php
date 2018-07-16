@@ -423,7 +423,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
         $apiResources['packages'] = array(
             'module' => 'Package Manager',
             'record_type' => 'PackageManagerPackage',
-            'actions' => array('get', 'index'),
+            'actions' => array('get', 'index')
         );
         return $apiResources;
     }
