@@ -28,7 +28,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
      */
     protected $_filters = array('admin_navigation_main','admin_navigation_global',
 								'response_contexts','action_contexts',
-								'search_record_types', 'api_resources');
+								'search_record_types', 'api_resources_packages', 'api_resources_relations');
     /**
      * @var array Options and their default values.
      */
