@@ -1,6 +1,6 @@
 <?php
 
-class Api_PackageManagerPackagesRelation extends Omeka_Record_Api_AbstractRecordAdapter
+class Api_PackageManagerPackagesRelations extends Omeka_Record_Api_AbstractRecordAdapter
 {
     // Get the REST representation of a record.
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
