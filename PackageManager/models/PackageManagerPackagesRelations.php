@@ -17,6 +17,6 @@ class PackageManagerPackagesRelations extends Omeka_Record_AbstractRecord implem
 
     public function getResourceId()
     {
-        return 'PackageManagerRelations_Index';
+        return 'PackageManager_Index';
     }
 }

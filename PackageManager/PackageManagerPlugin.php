@@ -198,14 +198,9 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
         
         $indexResource = new Zend_Acl_Resource('PackageManager_Index');
         $packageResource = new Zend_Acl_Resource('PackageManager_Cart');
-        $relationsResource = new Zend_Acl_Resource('PackageManagerRelations_Index');
         $acl->add($indexResource);
 		$acl->add($packageResource);
-		$acl->add($relationsResource);
-        $acl->allow(array('super', 'admin'), array(
-            'PackageManager_Index',
-            'PackageManager_Cart',
-            'PackageManagerRelations_Index'));
+        $acl->allow(array('super', 'admin'), array('PackageManager_Index', 'PackageManager_Cart'));
     }
 
     /**
@@ -425,12 +420,12 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterApiResources($apiResources)
     {
-/*        $apiResources['packages'] = array(
+        $apiResources['packages'] = array(
             'module' => 'Package Manager',
             'record_type' => 'PackageManagerPackage',
             'actions' => array('get', 'index'),
             'index_params' => array('relations')
-        );*/
+        );
 
         $apiResources['package_relations'] = array(
             'module' => 'Package Manager',
