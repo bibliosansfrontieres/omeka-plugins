@@ -28,7 +28,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
      */
     protected $_filters = array('admin_navigation_main','admin_navigation_global',
 								'response_contexts','action_contexts',
-								'search_record_types');
+								'search_record_types', 'api_resources');
     /**
      * @var array Options and their default values.
      */
@@ -416,5 +416,16 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
             $contexts['show'] = array('csv','yaml','object');
         }
         return $contexts;
+    }
+
+    public function filterApiResources($apiResources)
+    {
+        $apiResources['packages'] = array(
+            'module' => 'Package Manager',
+            'record_type' => 'PackageManagerPackage',
+            'actions' => array('get', 'index'),
+            'index_params' => array('relations')
+        );
+        return $apiResources;
     }
 }
