@@ -418,13 +418,24 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
         return $contexts;
     }
 
-    public function filterApiResources($apiResources)
+    public function filterApiResourcesPackages($apiResources)
     {
         $apiResources['packages'] = array(
             'module' => 'Package Manager',
             'record_type' => 'PackageManagerPackage',
             'actions' => array('get', 'index'),
             'index_params' => array('relations')
+        );
+        return $apiResources;
+    }
+
+    public function filterApiResourcesRelations($apiResources)
+    {
+        $apiResources['package_relations'] = array(
+            'module' => 'Package Manager',
+            'record_type' => 'PackageManagerPackagesRelation',
+            'actions' => array('get', 'index'),
+            'index_params' => array('item_id','package_id')
         );
         return $apiResources;
     }
