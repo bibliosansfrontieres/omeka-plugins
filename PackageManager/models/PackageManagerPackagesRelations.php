@@ -10,8 +10,13 @@
  * Package Manager packages relations record class.
  */
 
-class PackageManagerPackagesRelations extends Omeka_Record_AbstractRecord
+class PackageManagerPackagesRelations extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     public $package_id;
     public $item_id;
+
+    public function getResourceId()
+    {
+        return 'PackageManagerRelations_Index';
+    }
 }
