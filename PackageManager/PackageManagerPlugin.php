@@ -28,7 +28,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
      */
     protected $_filters = array('admin_navigation_main','admin_navigation_global',
 								'response_contexts','action_contexts',
-								'search_record_types', 'api_resources_packages', 'api_resources_relations');
+								'search_record_types', 'api_resources');
     /**
      * @var array Options and their default values.
      */
@@ -418,7 +418,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
         return $contexts;
     }
 
-    public function filterApiResourcesPackages($apiResources)
+    public function filterApiResources($apiResources)
     {
         $apiResources['packages'] = array(
             'module' => 'Package Manager',
@@ -426,17 +426,14 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
             'actions' => array('get', 'index'),
             'index_params' => array('relations')
         );
-        return $apiResources;
-    }
 
-    public function filterApiResourcesRelations($apiResources)
-    {
         $apiResources['package_relations'] = array(
             'module' => 'Package Manager',
             'record_type' => 'PackageManagerPackagesRelation',
             'actions' => array('get', 'index'),
             'index_params' => array('item_id','package_id')
         );
+
         return $apiResources;
     }
 }
