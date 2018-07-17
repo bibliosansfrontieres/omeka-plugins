@@ -425,12 +425,12 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterApiResources($apiResources)
     {
-        $apiResources['packages'] = array(
+/*        $apiResources['packages'] = array(
             'module' => 'Package Manager',
             'record_type' => 'PackageManagerPackage',
             'actions' => array('get', 'index'),
             'index_params' => array('relations')
-        );
+        );*/
 
         $apiResources['package_relations'] = array(
             'module' => 'Package Manager',
