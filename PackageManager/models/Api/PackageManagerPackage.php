@@ -10,6 +10,7 @@ class Api_PackageManagerPackage extends Omeka_Record_Api_AbstractRecordAdapter
             'id' => $record->id,
             'slug' => $record->slug,
             'description' => $record->description,
+            'goal' => $record->global_objective,
             'language' => $record->language,
             'last_exportable_modification' => $record->last_exportable_modification,
             'ideascube_name' => $record->ideascube_name,
