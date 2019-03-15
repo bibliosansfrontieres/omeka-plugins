@@ -4,3 +4,4 @@ Technical:ItemType, Technical:Collection, Dublin Core:Title, Dublin Core:Creator
 "Email", "Test Collection 2","Siddhartha", "Hermann Hesse", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
 "Email", "Collection inexistante","Siddhartha", "Hermann Hesse", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
 "ItemType inexistant", "Test Collection 1","Siddhartha", "Hermann Hesse", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
+"Email", "","No collection", "No collection", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
