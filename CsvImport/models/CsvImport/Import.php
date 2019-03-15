@@ -692,7 +692,13 @@ class CsvImport_Import extends Omeka_Record_AbstractRecord
             return FALSE;
         }
 
-        $result = $this->getColumnMaps()->map($row);
+        try {
+            $result = $this->getColumnMaps()->map($row);
+        } catch (Omeka_Record_Builder_Exception $e) {
+            $this->_log($e, Zend_Log::ERR);
+            return false;
+        }
+
         $tags = $result[CsvImport_ColumnMap::TYPE_TAG];
         $itemMetadata = array(
             Builder_Item::IS_PUBLIC      => $this->is_public,

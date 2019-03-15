@@ -33,10 +33,13 @@ class CsvImport_ColumnMap_Collection extends CsvImport_ColumnMap
             $collection = $this->_getCollectionByTitle($collectionTitle);
             if ($collection) {
                 $result = $collection->id;
+            } else {
+                throw new Omeka_Record_Builder_Exception("Invalid collection named {$collectionTitle} provided !");
             }
         }
         return $result;
     }
+
     
     /**
      * Return a collection by its title

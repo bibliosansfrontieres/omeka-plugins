@@ -2,3 +2,5 @@ Technical:ItemType, Technical:Collection, Dublin Core:Title, Dublin Core:Creator
 "Event", "Test Collection 1","Robinson Crusoe", "Daniel Defoe", "A man survives on an island.", "book, classic, island", "", "15"
 "Email", "Test Collection 1","The Count of Monte Cristo", "Alexandre Dumas", "A man seeks revenge.", "book, classic, France", "gcesarine@gmail.com", ""
 "Email", "Test Collection 2","Siddhartha", "Hermann Hesse", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
+"Email", "Collection inexistante","Siddhartha", "Hermann Hesse", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
+"ItemType inexistant", "Test Collection 1","Siddhartha", "Hermann Hesse", "A man seeks enlightenment.", "book, class, India", "gregg.cesarine@gmail.com", ""
