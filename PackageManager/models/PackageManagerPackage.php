@@ -20,7 +20,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
     public $audience;
     public $language;
     public $language_level;
-    public $target_specificity;
+    public $subject;
     public $education_level;
     public $other_objectives;
     public $slug;
@@ -210,7 +210,7 @@ class PackageManagerPackage extends Omeka_Record_AbstractRecord implements Zend_
         $this->addSearchText($this->audience);
         $this->addSearchText($this->language);
         $this->addSearchText($this->language_level);
-        $this->addSearchText($this->target_specificity);
+        $this->addSearchText($this->subject);
         $this->addSearchText($this->education_level);
         $this->addSearchText($this->other_objectives);
 		
