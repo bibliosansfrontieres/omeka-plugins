@@ -200,7 +200,7 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
         $packageResource = new Zend_Acl_Resource('PackageManager_Cart');
         $acl->add($indexResource);
 		$acl->add($packageResource);
-        $acl->allow(array('super', 'admin'), array('PackageManager_Index', 'PackageManager_Cart'));
+        $acl->allow(array('super', 'admin', 'contributor'), array('PackageManager_Index', 'PackageManager_Cart'));
     }
 
     /**
