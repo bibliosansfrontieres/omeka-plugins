@@ -175,7 +175,7 @@ msgid "Language level"
 msgstr ""
 
 #: controllers/IndexController.php:193 views/admin/index/show.php:20
-msgid "Specificity"
+msgid "Subject"
 msgstr ""
 
 #: controllers/IndexController.php:201 views/admin/index/show.php:21

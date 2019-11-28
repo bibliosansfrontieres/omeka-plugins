@@ -242,11 +242,11 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
             )
         );
         $form->addElementToEditGroup(
-            'text', 'target_specificity',
+            'text', 'subject',
             array(
-                'id' => 'package-manager-package-target-specificity',
-                'value' => $package->target_specificity,
-                'label' => __('Specificity'),
+                'id' => 'package-manager-package-subject',
+                'value' => $package->subject,
+                'label' => __('Subject'),
             )
         );
         $form->addElementToEditGroup(

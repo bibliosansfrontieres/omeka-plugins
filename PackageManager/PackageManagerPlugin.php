@@ -177,6 +177,22 @@ class PackageManagerPlugin extends Omeka_Plugin_AbstractPlugin
 			";
 			$db->query($sql);
 		}
+
+		if (version_compare($oldVersion, '1.0.9', '<')) {
+			// create new field subject
+			$sql = "
+			ALTER TABLE `".$db->PackageManagerPackage."`
+			ADD `subject` tinytext COLLATE utf8_unicode_ci  AFTER `description`;
+			";
+			$db->query($sql);
+
+            // Drop target_specificity that is not used.
+			$sql = "
+			ALTER TABLE `".$db->PackageManagerPackage."`
+			DROP `target_specificity`;
+			";
+			$db->query($sql);
+		}
     }
 
     /**

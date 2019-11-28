@@ -21,7 +21,7 @@ echo flash();
 		<p><strong><?php echo __('Audience');?></strong> : <?php echo metadata('package_manager_package', 'audience');?></p>
 		<p><strong><?php echo __('Language');?></strong> : <?php echo metadata('package_manager_package', 'language');?></p>
 		<p><strong><?php echo __('Language level');?></strong> : <?php echo metadata('package_manager_package', 'language_level');?></p>
-		<p><strong><?php echo __('Specificity');?></strong> : <?php echo metadata('package_manager_package', 'target_specificity');?></p>
+		<p><strong><?php echo __('Subject');?></strong> : <?php echo metadata('package_manager_package', 'subject');?></p>
 		<p><strong><?php echo __('Education level');?></strong> : <?php echo metadata('package_manager_package', 'education_level');?></p>
 		<p><strong><?php echo __('Other objectives');?></strong> : <?php echo metadata('package_manager_package', 'other_objectives');?></p>
 	<?php if(($pm_relation = get_option('package_manager_item_type_relation')) && $pm_relation > 0):

@@ -188,8 +188,8 @@ msgid "Language level"
 msgstr "Niveau de langue"
 
 #: controllers/IndexController.php:193 views/admin/index/show.php:20
-msgid "Specificity"
-msgstr "Spécificité du public"
+msgid "Subject"
+msgstr "Sujet du contenu"
 
 #: controllers/IndexController.php:201 views/admin/index/show.php:21
 msgid "Education level"
