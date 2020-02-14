@@ -67,8 +67,7 @@ class PackageManager_IndexController extends Omeka_Controller_AbstractActionCont
 			}
 		}
         $requiredItemFileds = array(
-            'Dublin Core' => array('Title', 'Description', 'Creator', 'Language'),
-            'Item Type Metadata' => array('Path'),
+            'Dublin Core' => array('Title', 'Description', 'Creator', 'Language')
         );
         $results = array();
         $this->view->incompleteItems = array();
